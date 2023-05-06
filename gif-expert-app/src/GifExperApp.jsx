@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { AddCategory } from "./components/AddCategory";
-import { GifGrid } from "./components/GifGrid";
+import { AddCategory, GifGrid } from "./components";
 
 export const GifExperApp = () => {
   const [categories, setCategories] = useState(["Overlord"]);
@@ -13,11 +12,8 @@ export const GifExperApp = () => {
 
   return (
     <>
-      {/**Titulo */}
       <h1>GifExpertApp</h1>
-      {/**Input */}
       <AddCategory onNewValue={(value) => onAddCategoy(value)} />
-      {/**Listado_Gif*/}
       {categories.map((category) => (
         <GifGrid key={category} category={category} />
       ))}
