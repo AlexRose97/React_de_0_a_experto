@@ -7,6 +7,26 @@ describe('Prueba en componente <AddCategory/ >', () => {
         const input = screen.getByRole("textbox");
         fireEvent.input(input, { target: { value: "Saitama" } })
         expect(input.value).toBe("Saitama");
-        screen.debug();
+        //screen.debug();
+    });
+
+
+    test('Debe llamar onNewValue si se ingresa un valor', () => {
+        const inputValue = "Saitama";
+
+        //renderizar la pagina
+        render(<AddCategory onNewValue={() => { }} />);
+
+        //obtener los componentes a manipular
+        const input = screen.getByRole("textbox");
+        const form = screen.getByRole("form");
+
+        //enviar valores
+        fireEvent.input(input, { target: { value: inputValue } })
+        fireEvent.submit(form);
+
+        //la pagina al enviar el formulario reinicia el campo de busqueda
+        expect(input.value).toBe("")
+        //screen.debug()
     });
 });
