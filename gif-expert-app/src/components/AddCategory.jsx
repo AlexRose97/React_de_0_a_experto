@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from 'prop-types'
 
 export const AddCategory = ({ onNewValue }) => {
   const [inputValue, setInputValue] = useState("");
@@ -7,11 +8,10 @@ export const AddCategory = ({ onNewValue }) => {
   };
 
   const onSubmit = (event) => {
-    if (inputValue.trim().length > 1) {
-      onNewValue(inputValue.trim());
-      setInputValue("");//reiniciar el input
-    }
     event.preventDefault();
+    if (inputValue.trim().length <= 1) { return; }
+    setInputValue("");//reiniciar el input
+    onNewValue(inputValue.trim());
   };
   return (
     <form onSubmit={onSubmit}>
@@ -24,3 +24,9 @@ export const AddCategory = ({ onNewValue }) => {
     </form>
   );
 };
+
+
+
+AddCategory.propTypes = {
+  onNewValue: PropTypes.func.isRequired,
+}
