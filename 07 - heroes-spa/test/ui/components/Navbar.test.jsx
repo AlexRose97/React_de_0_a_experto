@@ -1,7 +1,15 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Navbar } from "../../../src/ui/components";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../src/auth/context";
+
+
+const mockedUseNavigate = jest.fn()
+
+jest.mock("react-router-dom", () => ({
+    ...jest.requireActual('react-router-dom'),
+    useNavigate: () => mockedUseNavigate
+}))
 
 describe('Pruebas en <Navbar/>', () => {
     test('debe de mostrar el nombre del usuario', () => {
@@ -35,6 +43,7 @@ describe('Pruebas en <Navbar/>', () => {
         );
         const btLogout = screen.getByText("Logout");
         fireEvent.click(btLogout);
-        screen.debug()
+        expect(contextValue.logout).toHaveBeenCalled()
+        expect(mockedUseNavigate).toHaveBeenCalledWith("/login", {"replace": true})
     });
 });
