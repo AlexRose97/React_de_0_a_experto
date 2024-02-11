@@ -8,7 +8,7 @@ const ShowAlertSearch = ({ text, lengthResult }) => {
   if (text === "")
     return (<div className="alert alert-primary animate__animated animate__fadeIn">Search a hero</div>)
   if (lengthResult === 0)
-    return (<div className="alert alert-danger animate__animated animate__fadeIn">No hero with <b>{text}</b></div>)
+    return (<div aria-label="alert-danger" className="alert alert-danger animate__animated animate__fadeIn">No hero with <b>{text}</b></div>)
 }
 
 export const SearchPage = () => {
@@ -34,7 +34,7 @@ export const SearchPage = () => {
         <div className="col-5">
           <h4>Searching</h4>
           <hr />
-          <form onSubmit={onSearchSubmit}>
+          <form onSubmit={onSearchSubmit} aria-label="form">
             <input
               type="text"
               placeholder="Search a hero"
